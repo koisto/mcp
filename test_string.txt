@@ -1,0 +1,12 @@
+{"hello":1}
+{"jsonrpc":"2.0","method":1}
+{"jsonrpc":"2.0","method":"ted"}
+{"jsonrpc":"1.0","method":"ted"}
+{"jsonrpc":"2.0","method":[]
+{"jsonrpc":"2.0","method":"ted","id":null}
+{"jsonrpc":"2.0","method":"ted","id":1234}
+{"jsonrpc":"2.0","method":"ted","id":1234.5}
+{"jsonrpc":"2.0","method":"ted","id":"asbcd"}
+{"jsonrpc":"2.0","method":"ted","params":{}}
+{"jsonrpc":"2.0","method":"ted","params":[]}
+{"jsonrpc":"2.0","method":"ted","params":1234}
