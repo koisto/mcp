@@ -3,13 +3,13 @@
 #include <string>
 
 #include "util.h"
-#include "json_rpc.h"
+#include "mcp_server.h"
 
 
 
 int main(int argc, char **argv)
 {
-    json_rpc rpc;
+    mcp_server mcp("my mcp server", "0.0.1");
 
     log_msg("MCP Server started.\n");
 
@@ -17,7 +17,7 @@ int main(int argc, char **argv)
     while (std::getline(std::cin, msg))
     {
         //msg = R"({"test":1})";
-        std::cout << rpc.parse_request(msg) << std::endl;
+        std::cout << mcp.parse_request(msg) << std::endl;
     }
 
     return 0;

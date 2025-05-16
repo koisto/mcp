@@ -10,3 +10,5 @@
 {"jsonrpc":"2.0","method":"ted","params":{}}
 {"jsonrpc":"2.0","method":"ted","params":[]}
 {"jsonrpc":"2.0","method":"ted","params":1234}
+
+{"jsonrpc":"2.0","method":"initialize","params":{}, "id":5678}

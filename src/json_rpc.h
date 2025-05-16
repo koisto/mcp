@@ -25,7 +25,7 @@ public:
     std::string parse_request(const std::string msg);
 
 protected: 
-    std::string request_method_handler(const std::string method, json &params, json &id);
+    virtual std::string request_method_handler(const std::string method, json &params, json &id);
 
     std::string build_error_response(const int error_code, const std::string message, json &id);
     std::string build_result_response(json &result, json &id);

@@ -5,7 +5,8 @@ project(mcp-hello)
 
 add_executable(mcp-hello
     src/main.cpp
-    src/json_rpc.cpp)
+    src/json_rpc.cpp
+    src/mcp_server.cpp)
 
 target_include_directories(mcp-hello PRIVATE third_party)
 
