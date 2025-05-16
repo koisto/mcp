@@ -30,11 +30,42 @@ std::string mcp_server::request_method_handler(const std::string method, json &p
         }
         else if (method == "tools/list")
         {
-        
+            json tool_list_result;
+            tool_list_result["tools"] = {
+                {
+                    {"name", "get_time"},
+                    {"description", "Gets the current time"},
+                    {"inputSchema",{
+                        {"type", "object"},
+                        {"properties", json::object()},
+                        {"required", json::array()}
+                    }}
+                }
+            };
+
+            return build_result_response(tool_list_result, id);
         }
         else if (method == "tools/call")
         {
-            
+            // we need a params object for this to work
+            if (params.is_object() &&
+                params.contains("name"))// && 
+                //params.contains("arguments"))
+            {
+                json tool_name = params.at("name");
+                //json tool_args = params.at("arguments");
+
+                json tool_call_response;
+                tool_call_response["content"] = {
+                    {{"type", "text"},
+                    {"text", "12:00:01"}}
+                };
+                return build_result_response(tool_call_response, id);
+            }
+            else
+            {
+                return build_error_response(JSONRPC_INVALID_PARAMS_ERR, "Invalid params", id);
+            }
         }
     }
     else

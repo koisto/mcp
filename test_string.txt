@@ -12,3 +12,4 @@
 {"jsonrpc":"2.0","method":"ted","params":1234}
 
 {"jsonrpc":"2.0","method":"initialize","params":{}, "id":5678}
+{"jsonrpc":"2.0","method":"tools/list","params":{}, "id":5678}
