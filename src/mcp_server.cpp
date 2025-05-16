@@ -10,6 +10,11 @@ mcp_server::~mcp_server()
 {
 }
 
+void mcp_server::add_tool(mcp_server_tool_base &tool)
+{
+    tools.insert({tool.name, tool});
+}
+
 std::string mcp_server::request_method_handler(const std::string method, json &params, json &id)
 {
     // we need an id for anything that expects a response
@@ -31,17 +36,22 @@ std::string mcp_server::request_method_handler(const std::string method, json &p
         else if (method == "tools/list")
         {
             json tool_list_result;
-            tool_list_result["tools"] = {
-                {
-                    {"name", "get_time"},
-                    {"description", "Gets the current time"},
-                    {"inputSchema",{
-                        {"type", "object"},
-                        {"properties", json::object()},
-                        {"required", json::array()}
-                    }}
-                }
-            };
+            tool_list_result["tools"] = json::array();
+
+            int i = 0;
+            for(auto it = tools.begin(); it != tools.end(); ++it)
+            {
+                json tool;
+                tool["name"]        = it->first;
+                tool["description"] = it->second.description;
+                tool["inputSchema"] = {
+                    {"type", "object"},
+                    {"properties", it->second.get_schema_properties()},
+                    {"required", it->second.get_schema_required()}
+                };
+
+                tool_list_result["tools"][i++] = tool; 
+            }
 
             return build_result_response(tool_list_result, id);
         }
@@ -78,4 +88,14 @@ std::string mcp_server::request_method_handler(const std::string method, json &p
     } 
 
     return build_error_response(JSONRPC_METHOD_NOT_FOUND_ERR, "Method not found", id);
+}
+
+mcp_server_tool_base::mcp_server_tool_base(std::string name_, std::string description_) :
+                                                                name(name_),
+                                                                description(description_)
+{
+}
+
+mcp_server_tool_base::~mcp_server_tool_base()
+{
 }
